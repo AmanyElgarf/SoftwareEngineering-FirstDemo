@@ -1,1 +1,10 @@
-readme
+This folder contains all the files you need to run the demo for the techincal forecaster section of our project.
+
+You will need the following python modules:
+  PIP
+  Pillow
+  mysql-connector-python
+  statsmodels
+  scipy
+  
+Download all files into one folder and run techcontroller.py
