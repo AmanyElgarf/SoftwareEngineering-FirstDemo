@@ -5,10 +5,13 @@ from datetime import timedelta
 import requests
 
 class Webscraper:
+    #CONSTRUCTOR:
     def __init__(self):
         self.url = ''
         self.response = []
         self.headlines = []
+    
+    #getHeadlines() function
     def getHeadlines(self, ticker):
         self.url = ('https://newsapi.org/v2/everything?'
                 'q=' + ticker + '&'
@@ -20,8 +23,11 @@ class Webscraper:
         for article in self.response["articles"]:
             self.headlines.append(article["title"])
         return self.headlines
-        #with open('googletest.json', 'w') as outfile:
-            #json.dump(self.response, outfile)
+        
+        #TESTING:
+        
+            #with open('googletest.json', 'w') as outfile:
+                #json.dump(self.response, outfile)
 
 
 #print (response.json)
