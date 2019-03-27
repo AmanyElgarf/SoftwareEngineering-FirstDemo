@@ -1,7 +1,9 @@
 class SentimentPredictor:
+#The constructor has only one attribute, which is the prediction returned to the user when sentimentPredictor.predict() function is used    
     def __init__(self):
         self.prediction = ''
-
+        
+#This function takes an integer score as an input and maps it to a string prediction, and returns that prediction
     def predict(self, score):
         if (score == 2.0):
             self.prediction = 'The Sentiment Analyzer did not have enough data to make an accurate prediction for the provided stock.'
