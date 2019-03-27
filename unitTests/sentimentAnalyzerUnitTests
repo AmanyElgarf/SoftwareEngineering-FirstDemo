@@ -3,6 +3,7 @@ from SentimentPredictor import SentimentPredictor
 from SentimentController import search_stock_symbol
 from SentimentController import calcAvgSentScore
 from SentimentController import updateDB
+from Webscraper import getHeadlines
 
 sentCalculator = SentimentCalculator()
 sentPredictor = SentimentPredictor()
@@ -44,3 +45,9 @@ print(updateDB(0.067, "AAPL"))  #returns SENTIMENT SCORE UPDATED SUCCESSFULLY
 print(updateDB(0.03, "TSLA"))  #returns SENTIMENT SCORE UPDATED SUCCESSFULLY
 print(updateDB(0.02999, "POTATO")) #returns STOCK NAME DOESNT EXISTS IN THE DATABASE
 print(updateDB(-0.03, "NONE"))  #returns STOCK NAME DOESNT EXISTS IN THE DATABASE
+
+#Unit Test6: Webscraper getHeadlines function
+print("\nTesting Webscraper getHeadlines function")
+  #under TESTING comment in Webscraper.py a .json file is created to show headlines generated from getHeadlines
+print(getHeadlines("AAPL"))  #returns x amount in totalResult
+print(getHeadlines("la-la-la-la-la-ja-ja-ja-ja"))  #returns 0 in totalResult
