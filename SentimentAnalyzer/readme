@@ -4,5 +4,10 @@ You will need the following python modules:
   PIP
   Pillow
   nltk
+  mysql-connector-python
+  Image 
+  requests
+  Tkinterhtml
+
   
 Download all files into one folder and run SentimentController.py
