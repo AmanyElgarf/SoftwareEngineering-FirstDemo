@@ -1,4 +1,6 @@
 import os
+#This function that reformats the LoughranMcDonald_MasterDictionary_2016.csv file so it becomes readable to the Vader dictionary
+
 def main ():
     if (os.path.exists("FinanceLexicon.txt")):
         os.remove("FinanceLexicon.txt")
