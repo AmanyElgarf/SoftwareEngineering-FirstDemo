@@ -49,25 +49,28 @@ class Neural_Network(object):
             self.o_delta)  # adjusting second set (hidden --> output) weights
 
     def train(self, X, y):
+        #when called in a loop, this incrementally tests the Neural Network with Dataset X as an input, and y as an expected output
         o = self.forward(X)
         self.backward(X, y, o)
 
     def saveWeights(self):
+        #when called after training it saves the weights that the NN uses to come up with a predicted output
         np.savetxt("w1.txt", self.W1, fmt="%s")
         np.savetxt("w2.txt", self.W2, fmt="%s")
 
 
     def predict(self, xPredicted):
         print("Predicted data based on trained weights: ")
-        print("Input (scaled): \n" + str(xPredicted))
+       
         prediction = self.forward(xPredicted)
-        print("Output: \n" + str(prediction))
+        
         return prediction
 
     def scaleinput(self, x):
+        # scales the inputs so that the NN can process the data as intended
         xPredicted = np.array(x, dtype = float)
         xPredicted = xPredicted/np.amax(xPredicted, axis=0)
         return xPredicted
 
 
-# full tutorial: https://enlight.nyc/neural-network
+
