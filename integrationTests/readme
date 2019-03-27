@@ -1,1 +1,50 @@
-readme
+Technical Forecaster Integration Tests
+
+Integration Test: Running the techcontroller.py runs the GUI and the backend (models). Tests:
+Putting invalid stock name
+Expected outcome: “Invalid stock “ popup
+Actual outcome: “Invalid stock “ popup
+Putting valid stock name
+Expected outcome: Predictions show up
+Actual outcome: Predictions show up
+
+Sentiment Analyzer Integration Tests
+
+Integration Test: The Integration Test for the Sentiment Analyzer team was simply to run the main function of SentimentController.py. Running the SentimentController.py file allowed us to test how the SentimentCalculator, SentimentPredictor, Webscraper, database, and GUI all worked together to function as expected. Prior to conducting this integration test, we had already performed unit tests for the following functions:
+SentimentCalculator
+calculate()
+SentimentPredictor
+predict()
+Webscraper
+getHeadlines()
+SentimentController
+calcAvgSentiment()
+search_stock_symbol()
+updateDB()
+The integration tests assumed that these backend functions had been unit-tested for accuracy and connected them together to actually display results to the frontend in real time. Our integration test accounted for a few different test scenarios:
+Test Scenarios:
+ Putting invalid stock ticker name (i.e. stock not in NYSE, non-stock code, etc.)
+Expected Outcome: “Stock name is invalid” message
+Actual Outcome: “Stock name is invalid” message
+Putting a valid stock ticker name (Uppercase stock code as it appears in NYSE)
+Expected Outcome: Pop-up with top 5 headlines, sentiment score, and sentiment prediction
+Actual Outcome: Pop-up with top 5 headlines, sentiment score, and sentiment prediction
+
+
+
+Automated Trader Integration Tests
+
+AutoTrader plays the most critical role in testing, as it integrates the output coming from the forecaster and the sentiment and runs the neural network, To handle this significant portion of data coming in and out and database requests, the Neural network module is imparted to the ATContorller.py, along with all the required modules. “compare prices”, “AutoTrade”, and “predict” functioned were test multiple times and as much needed t make sure the output is getting better over time, this was also done observing the weight of the neural network being outputted to w1.txt and w2.txt.. his indicates the neural network is functioning and trained SUCCESSFULLY.
+After successful implementation of the neural network, all the functions in the ATContoller.py were tested through giving various input and edge cases (negative number, non-existent data, invalid inputs) to make sure the corresponding error message is displayed. Furthermore, AutoTrader required us to see how everything is updated on the portfolio correctly, so for example: if the user buys stock, how balance changes/decreases, how portfolio logs the action and finally how the owned stocks gets adjusted, same applies for the sell, hold, deposit, withdraw functions to ensure all the controller functions in the AutoTrader are working properly and as expected. Some of these functions are:
+o AutoTrade()
+o Check_intial_deposi()
+o saveWeights()
+o train()
+o predict()
+o Print_portfolio_prices()
+o Print_balance()
+Testing Scenarios: 
+-	Invalid stock name
+-	Negative or non-numeric balance value
+-	Insufficient balance 
+
