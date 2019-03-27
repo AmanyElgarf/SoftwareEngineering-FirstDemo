@@ -1,1 +1,8 @@
-readme
+This folder contains all the files you need to run the demo for the sentiment analyzer section of our project.
+
+You will need the following python modules:
+  PIP
+  Pillow
+  nltk
+  
+Download all files into one folder and run SentimentController.py
