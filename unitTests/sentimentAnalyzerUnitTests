@@ -46,6 +46,7 @@ print(updateDB(0.03, "TSLA"))  #returns SENTIMENT SCORE UPDATED SUCCESSFULLY
 print(updateDB(0.02999, "POTATO")) #returns STOCK NAME DOESNT EXISTS IN THE DATABASE
 print(updateDB(-0.03, "NONE"))  #returns STOCK NAME DOESNT EXISTS IN THE DATABASE
 
+
 #Unit Test6: Webscraper getHeadlines function
 print("\nTesting Webscraper getHeadlines function")
   #under TESTING comment in Webscraper.py a .json file is created to show headlines generated from getHeadlines
