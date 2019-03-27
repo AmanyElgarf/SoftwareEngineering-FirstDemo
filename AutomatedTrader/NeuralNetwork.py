@@ -6,7 +6,9 @@ class Neural_Network(object):
         self.inputSize = 2
         self.outputSize = 1
         self.hiddenSize = 3
-
+        
+        #the current iteration of the Neural Network is Feed forward, takes 2 inputs, passes those through 3 hidden layers and gives one output
+            
         #weights
         self.W1 = np.loadtxt("w1.txt")  # (3x2) weight matrix from input to hidden layer
         self.W2 = np.loadtxt("w2.txt")  # (3x1) weight matrix from hidden to output layer
