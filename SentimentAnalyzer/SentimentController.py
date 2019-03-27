@@ -32,14 +32,12 @@ e1 = Entry(top)
 e1.place(x=680,  y=550)
 
 
-##########################################################
+#Tha mian funciton runs the GUI and asks the user to input a stock ticker, searches for the stock in the database, if found, it runs the rest of the function and if not, it exits and shows a message that says stock name is not valid
 def main():
     sentCalculator = SentimentCalculator()
     webScraper = Webscraper()
     sentPredictor = SentimentPredictor()
-
     x = search_stock_symbol(e1.get())
-
     if x == 1:
         headlines = requestHeadlines(webScraper, e1.get())
         avgScore = calcAvgSentScore(sentCalculator, headlines)
@@ -53,71 +51,59 @@ def main():
                             " The first 5 headlines are: " + "\n" + printHeadlines(headlines)
                             + "\n\n" + "Average Score of all Headlines Analyzed is: " + str(avgScore)
                             + "\n\n" + requestPrediction(sentPredictor, avgScore))
-
     else:
         messagebox.showinfo("Result", "Stock name is not valid")
 
-
-    #print sentCalculator.calculate("Microsoft's stock riding 7-day win streak toward another record close")
-    #print sentCalculator.calculate("Alphabet (GOOGL) Dips More Than Broader Markets: What You Should Know")
-
+#This function is used to link the main function to the GUI        
 def buttonFunc():
     main()
 
-
+#This function takes a string stock ticker and returns headlines correlates with the stock
 def requestHeadlines(webScraper, ticker):
     return webScraper.getHeadlines(ticker)
 
-
+#This function takes in an array of headlines and prints the first five headlines to the user
 def printHeadlines(headlines):
     h = " "
     for i in range(5):
         h = h + "\n" + "- “" + headlines[i] + '”'
     return h
 
-
+#This function takes a string array of headlines and their sentiment scores, finds the average of the scores, and returns the average sentiment score 
 def calcAvgSentScore(sentimentCalculator, headlines):
     totalScore = 0
     numHeadlines = 0
-    #isValid = 0 #initialized as false/assumes that all headlines get score of 2.0, aka no words from lexicon were in headline
     for headline in headlines:
-        #print(headline)
         score = sentimentCalculator.calculate(headline)
-        #print(score)
-        #if (score != 2.0):
-            #isValid = 1
         totalScore += score
         numHeadlines += 1
     return (totalScore/numHeadlines)
 
-
+#This function takes the calculated average sentiment score as an input and maps it to a string prediction, and outputs the prediction to the user
 def requestPrediction(sentimentPredictor, averageSent):
     return sentimentPredictor.predict(averageSent)
 
-
+#The SentimentController updateDB() establishes connection with database, updates the old sentiment score in the database with the new one and returns SENTIMENT SCORE UPDATED SUCCESSFULLY if it updates and STOCK NAME DOESN’T EXIST IN THE DATABASE if it doesn’t.
 def updateDB(sentiment, stockname):
     cnx = ms.connect(user='root', password='mypassword',
                      host='mydb.cwtgu3tqnwx8.us-east-2.rds.amazonaws.com',
                      database='mydb')
-
     mycursor = cnx.cursor()
-
     query = "SELECT stock_code FROM stock"
-
     mycursor.execute(query)
     result = mycursor.fetchall()
     print(sentiment)
     mycursor.execute("UPDATE stock SET sentiment = (%s) WHERE stock_code = (%s)", (sentiment, stockname))
-
     cnx.commit()
     print(stockname)
-
     cnx.close()
+    for x in result:
+      if x[0] == stockname:
+         return "SENTIMENT SCORE UPDATED SUCCESSFULLY\n"
+    return "STOCK NAME DOESNT EXISTS IN THE DATABASE\n"
 
-    #for x in result:
-        #print(x)
 
-
+#This function takes a string stock ticker, searches for that ticker in the database, and returns 1 if it exits and 0 if doesn’t
 def search_stock_symbol(stock_symbol):
     # connect to database
     cnx = ms.connect(user='root', password='mypassword', host='mydb.cwtgu3tqnwx8.us-east-2.rds.amazonaws.com',
@@ -131,7 +117,6 @@ def search_stock_symbol(stock_symbol):
         if x[0] == stock_symbol:
             return 1
     return 0
-##########################################################
 
 
 #######Create a calculate sentiment button#######
