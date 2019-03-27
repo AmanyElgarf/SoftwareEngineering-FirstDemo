@@ -1,0 +1,46 @@
+from SentimentCalculator import SentimentCalculator
+from SentimentPredictor import SentimentPredictor
+from SentimentController import search_stock_symbol
+from SentimentController import calcAvgSentScore
+from SentimentController import updateDB
+
+sentCalculator = SentimentCalculator()
+sentPredictor = SentimentPredictor()
+
+#Unit Test1: SentimentCalculator calculate function
+print("Testing SentimentCalculator calculate function")
+print(sentCalculator.calculate("Netflix Impresses with Abundance of Opportunities")) #strongly positive
+print(sentCalculator.calculate("Uber's Incompetent Self-Driving Car Jeopardizes IPO Valuation")) #strongly negative
+print(sentCalculator.calculate("Google Meets Expectations During Average Quarter")) #neutral statement
+
+#Unit Test2: SentimentPredictor predict function
+print("\nTesting SentimentPredictor predict function")
+print(sentPredictor.predict(0.065)) #strong rise
+print(sentPredictor.predict(0.03)) #weak rise
+print(sentPredictor.predict(0.02999)) #stagnant
+print(sentPredictor.predict(-0.03)) #weak fall
+print(sentPredictor.predict(-0.065)) #strong fall
+
+#Unit Test3: SentimentController search_stock_symbol function
+print("\nTesting SentimentController earch_stock_symbol function")
+print(search_stock_symbol("AAPL")) #returns 1
+print(search_stock_symbol("Apple")) #returns 0
+print(search_stock_symbol("aapl")) #returns 0
+print(search_stock_symbol("AaPl")) #returns 0
+
+#Unit Test4: SentimentController calcAvgSentScore function
+print("\nTesting SentimentController calcAvgSentScore function")
+print(calcAvgSentScore(sentCalculator,
+                       ["Netflix Impresses with Abundance of Opportunities",
+                        "Uber's Incompetent Self-Driving Car Jeopardizes IPO Valuation",
+                        "Google Meets Expectations During Average Quarter"]))
+#returns the average score of the three headlines found by testing the SentimentCalculator calculate function in unit test 1
+#it adds the three scors of the three headlines[found in unit test1] and divdes them by the number of the headlines
+
+
+#Unit Test5: SentimentController updateDB function
+print("\nTesting SentimentController updateDB function")
+print(updateDB(0.067, "AAPL"))  #returns SENTIMENT SCORE UPDATED SUCCESSFULLY
+print(updateDB(0.03, "TSLA"))  #returns SENTIMENT SCORE UPDATED SUCCESSFULLY
+print(updateDB(0.02999, "POTATO")) #returns STOCK NAME DOESNT EXISTS IN THE DATABASE
+print(updateDB(-0.03, "NONE"))  #returns STOCK NAME DOESNT EXISTS IN THE DATABASE
