@@ -1,1 +1,73 @@
-readme
+Technical Forecaster Unit Tests
+
+Rate of Change Unit Test: We tested whether the calculateROC returned a valid response given a certain closing prices list.
+
+Stochastic Oscillator Unit Tests: We tested to make sure that findHighest actually found the highest number out of a list and findLowest actually found the lowest number out of a list.
+
+ASI Unit Tests: We tested the getSwing() function on a list of integers for which it would be easy to verify the correctness of the calculation. Then the getASI function was verified to give a proper list of doubles when given a valid input and was verified to give an empty list for an invalid input.
+
+ARIMA Unit Tests: We tested to make sure that ARIMA would return the expected value given an empty list and given a valid list.
+
+GetPrediction Unit Test: We tested to make sure that at an invalid stock search, a popup message would pop up. When a valid stock was searched, the program would run expectedly.
+
+
+Sentiment Analyzer Unit Tests
+[Sentiment AnalyzerUnitTests.py]
+The unit tests for the Sentiment Analyzer team were done for 6 functions:
+
+#Unit Test1: SentimentCalculator calculate() function
+The SentimentCalculator calculate function takes a string headline, calculates the sentiment score that correlate to this headline using vader, and returns this score back to the user
+Unit test one was done three times:
+Inputing a headline that corresponds to a very positive sentiment score
+Inputing a headline that corresponds to a very negative sentiment score
+Inputing a headline that corresponds to a very neutral sentiment score
+
+#Unit Test2: SentimentPredictor predict() function
+The SentimentPredictor predict() function takes an integer sentiment score and maps to a prediction and outputs this prediciton to the user
+Unit test 2 was done five times
+Inputting a score that maps to a strong rise
+Inputting a score that maps to a weak rise
+Inputting a score that maps to a stagnant activity
+Inputting a score that maps to a weak fall
+Inputting a score that maps to a strong fall
+
+#Unit Test3: SentimentController search_stock_symbol() function
+The SentimentController search_stock_symbol() function takes a string stock ticker, searches for that ticker in the database, and returns 1 if it exits and 0 if doesn’t
+Unit test 3 was done 4 times
+Inputting a stock ticker that exists in the database 
+Inputting another 3 stock tickers that don’t exist in the database
+
+#Unit Test4: SentimentController calcAvgSentScore() function
+The SentimentController calcAvgSentScore() function takes a string array of headlines and their sentiment scores, finds the average of the scores, and returns the average score to the user 
+Unit test 4 was done 1 time
+Inputting the headlines and their corresponding scores found in test 1 and checking if the output is correct
+
+#Unit Test5: SentimentController updateDB() function
+The SentimentController updateDB() establishes connection with database, updates the old sentiment score in the database with the new one and returns SENTIMENT SCORE UPDATED SUCCESSFULLY if it updates and STOCK NAME DOESN’T EXIST IN THE DATABASE if it doesn’t.
+Unit test five was done 4 times
+Inputting stock tickers that exist in the database two time 
+Inputting stock tickers that don’t exist in the database two time 
+
+#Unit Test6: Webscraper getHeadlines() function 
+The Webscraper getHeadlines() retrieves the trending headlines off all news sources. The returning headlines vary according to what stock ticker the user inputs: the headlines will only return if a stock ticker has news to return; otherwise, if a stock ticker has no news to return then no headlines will appear. This was tested using .json files as an output from the function in a format similar to this: 
+
+
+Unit test was done 1 time: 
+A stock ticker with headlines to return as the input returns a JSON object with totalResults equal to an integer greater than 0
+A stock ticker without headlines to return as the input returns a JSON object with totalResults equal to 0 
+
+
+
+
+Automated Trader Unit Tests
+
+Database unit test: we tested if the function smoothly connects to the database, fetches the correct stock and how it hands invalid input
+
+
+Updated balance and linkage to portfolio test: we tested if the balance gets updated according the shares_purchased and if the portfolio gets updated correctly.
+
+
+Neural Network unit test: we tested if the neural network is responsive, the forecasted price takes sentiment and analyzed price into account and asks for a prediction from the neural network, we tested this function with different values of sentiment scores and forecasted prices to see how NN behaves given those changes. 
+
+
+
